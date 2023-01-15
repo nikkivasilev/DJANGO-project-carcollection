@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+    <title>CarCollection</title>
+</head>
+
+<body>
+<div id="box">
+    <header>
+        <!-- Navigation Bar -->
+        <h1><a class="index-navigation" href="{% url 'index' %}"><span>C</span>ARS <span>C</span>OLLECTION</a></h1>
+        <nav>
+
+
+            <a href="{% url 'catalogue' %}">Catalogue</a>
+            <a href="{% url 'create car' %}">Create Car</a>
+            <a href="{% url 'details profile' %}">Profile</a>
+
+        </nav>
+    </header>
+
+
+    {% if cars %}
+
+        <section id="catalogue">
+            <h1>Total cars: {{ total_cars }}</h1>
+            {% for car in cars %}
+                <!-- first car-->
+                <div class="car-card">
+                    <div class="image-wrap">
+                        <!-- car image -->
+                        <img src="{{ car.image_url }}"
+                             alt="Sport Car">
+                    </div>
+                    <!-- car type -->
+                    <h3>{{ car.type }}</h3>
+                    <!-- car model -->
+                    <h1>{{ car.model }}</h1>
+                    <div class="details-buttons">
+                        <!-- car details button -->
+                        <a href="{% url 'details car' pk=car.pk %}" class="details-btn">Details</a>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </section>
+
+    {% else %}
+
+        <p class="no-articles">No cars yet</p>
+    {% endif %}
+    <!-- footer -->
+    <footer>
+        &copy;SoftUni Team 2022. All rights reserved.
+    </footer>
+</div>
+</body>
+</html>
